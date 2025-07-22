@@ -31,8 +31,19 @@ const Loginmodal = ({ onClose }) => {
       if (!res.ok) throw new Error(data.error || 'Login failed');
       // Set login state in localStorage
       localStorage.setItem('isLoggedIn', 'true');
-      // Redirect to dashboard (simulate with window.location)
-      window.location.href = '/dashboard';
+      // Store role in sessionStorage/localStorage
+      if (data.user && data.user.role) {
+        sessionStorage.setItem('role', data.user.role);
+        localStorage.setItem('role', data.user.role);
+      }
+      // Redirect based on role
+      if (data.user && data.user.role === 'seller') {
+        window.location.href = '/seller';
+      } else if (data.user && data.user.role === 'admin') {
+        window.location.href = '/admin';
+      } else {
+        window.location.href = '/home';
+      }
     } catch (err) {
       setError(err.message);
     } finally {
