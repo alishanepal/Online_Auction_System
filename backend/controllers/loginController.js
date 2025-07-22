@@ -1,4 +1,4 @@
-const pool = require('../db');
+const pool = require('../config/db');
 
 class LoginController {
   static async loginUser(req, res) {

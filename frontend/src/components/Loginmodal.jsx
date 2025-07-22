@@ -29,6 +29,8 @@ const Loginmodal = ({ onClose }) => {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Login failed');
+      // Set login state in localStorage
+      localStorage.setItem('isLoggedIn', 'true');
       // Redirect to dashboard (simulate with window.location)
       window.location.href = '/dashboard';
     } catch (err) {
